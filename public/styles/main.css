@@ -1,6 +1,8 @@
 @import "fonts.css";
 
-body {
+
+/* ORIGINAL STYLES: REMOVE */
+/*body {
   background: #ec008c;
   color: #fff;
 }
@@ -15,4 +17,16 @@ h1 {
   font: 20vmin/1 HUGEAvantGardeBold;
   letter-spacing: -0.06em;
   text-align: center;
+}*/
+
+/* SET BOX MODEL TO BORDERBOX GLOBALLY */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
 }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
