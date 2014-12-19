@@ -99,6 +99,20 @@ Huge.Comm = (function() {
 
 })()
 
+Huge.Template = (function() {
+
+	var extractTemplate = function(templateId) {
+		var template = document.getElementById(templateId).children
+		return template
+	}
+
+	return {
+		get: function(templateId) {
+			return extractTemplate(templateId)
+		}
+	}
+})()
+
 Huge.View = (function() {
 
 	var mobileView,
@@ -106,14 +120,22 @@ Huge.View = (function() {
 			menuItemSubTemplate,
 			hugeBody
 
+	var extractTemplates = function() {
+		menuItemTemplate = Huge.Template.get("nav-l1-template")
+		menuItemSubTemplate = Huge.Template.get("nav-l2-template")
+		console.log(menuItemTemplate)
+		console.log(menuItemSubTemplate)
+	}
+
+	var renderMenu = function() {
+		
+	}
 
 	var setMobileView = function() {
 		window.innerWidth < 768 ? mobileView = true : mobileView = false
-		// console.log("setting inital mobileView to: ", mobileView)
 	}
 
 	var closeMobileNav = function() {
-		console.log("closing menu")
 		hugeBody.classList.remove("menu-open")
 	}
 
@@ -138,6 +160,7 @@ Huge.View = (function() {
 	return {
 		init: function() {
 			setMobileView()
+			extractTemplates()
 			bindListeners()
 		}
 	}
