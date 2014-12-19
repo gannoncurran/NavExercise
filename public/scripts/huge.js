@@ -24,7 +24,6 @@ Huge.MenuData = (function() {
 			var idPrefix = 'menu-item_l1_'
 			var menuItem = {}
 			var item = items[id]
-			// menuItem.id = idPrefix + i
 			menuItem.open = false
 			menuItem.label = item.label
 			menuItem.url = item.url
@@ -36,7 +35,6 @@ Huge.MenuData = (function() {
 				var subIdPrefix = 'menu-item_l1-'+id+'_l2_'
 				for (var subId = 0; subId < subs.length; subId ++) {
 					var sub = {}
-					// sub.id = subIdPrefix + subId
 					sub.label = subs[subId].label
 					sub.url = subs[subId].url
 					menuItem.subs[subIdPrefix + subId] = sub
@@ -136,12 +134,29 @@ Huge.View = (function() {
 		// console.log("in render", menuItemTemplate)
 
 		for (var i = 0; i < keys.length; i ++) {
+			item = menuData[keys[i]]
 			var template = Huge.Template.get("nav-l1-template")
 			var menuItem = template[0].cloneNode(true)
-			menuItem.children[1].textContent = menuData[keys[i]].label
-			menuItem.children[1].href = menuData[keys[i]].url
+			menuItem.children[1].textContent = item.label
+			menuItem.children[1].href = item.url
+			menuItem.setAttribute("id", keys[i])
+			if (item.hasSubs == true) {
+				menuItem.classList.remove("no-subs")
+				var subKeys = Object.keys(item.subs)
+				console.log(subKeys)
+				for (var j = 0; j < subKeys.length; j ++) {
+					subItem = item.subs[subKeys[j]]
+					console.log("subItem: ", subItem)
+					var subTemplate = Huge.Template.get("nav-l2-template")
+					var subMenuItem = subTemplate[0].cloneNode(true)
+					subMenuItem.children[0].textContent = subItem.label
+					subMenuItem.children[0].href = subItem.url
+					subMenuItem.setAttribute("id", subKeys[j])
+					menuItem.children[2].appendChild(subMenuItem)
+				}
+			}
 			document.getElementById("nav-l1-mountpoint").appendChild(menuItem)
-			console.log("menuItem: ", menuItem)
+			console.log(menuItem)
 		}
 
 	}
