@@ -15,9 +15,54 @@
 
 var Huge = {}
 
+Huge.MenuData = (function() {
+	var menuItems = {}
+
+	var parseItems = function(resData){
+		var items = resData.items
+		for (var id = 0; id < items.length; id ++) {
+			var idPrefix = 'menu-item_l1_'
+			var menuItem = {}
+			var item = items[id]
+			// menuItem.id = idPrefix + i
+			menuItem.open = false
+			menuItem.label = item.label
+			menuItem.url = item.url
+			menuItem.subs = {}
+
+			if (item.items.length > 0) {
+				menuItem.hasSubs = true
+				var subs = item.items
+				var subIdPrefix = 'menu-item_l1-'+id+'_l2_'
+				for (var subId = 0; subId < subs.length; subId ++) {
+					var sub = {}
+					// sub.id = subIdPrefix + subId
+					sub.label = subs[subId].label
+					sub.url = subs[subId].url
+					menuItem.subs[subIdPrefix + subId] = sub
+				}
+			} else {
+				menuItem.hasSubs = false
+			}
+			menuItems[idPrefix + id] = menuItem
+		}
+		console.log("menuItems is now: ", menuItems)
+	}
+
+	return {
+		init: function(items) {
+			parseItems(items)
+		},
+		getAll: function() {
+			return menuItems
+		}
+	}
+
+})()
+
 Huge.Comm = (function() {
 
-	var retrieveMenuData = function() {
+	var retrieveMenuData = function(resFn) {
 		var data 
 
 		request = new XMLHttpRequest();
@@ -27,27 +72,73 @@ Huge.Comm = (function() {
 		  if (this.status >= 200 && this.status < 400){
 		    // Success!
 		    data = JSON.parse(this.response)
-		    console.log("response from server, parsed: ", data)
-		    return data
+		    resFn(data)
 		  } else {
 		    // We reached our target server, but it returned an error
-			console.log("We reached our target server, but it returned an error")
-			data = []
+				console.log("We reached our target server, but it returned an error")
+				data = {items: []}
+		    resFn(data)
 		  }
 		}
 
 		request.onerror = function() {
 		  // There was a connection error of some sort
 			console.log("There was a connection error of some sort")
-			data = []
+			data = {items: []}
+	    resFn(data)
 		}
 
 		request.send()
 	}
 
 	return {
-		getMenuData: function() {
-			retrieveMenuData()
+		getMenuData: function(resFn) {
+			retrieveMenuData(resFn)
+		}
+	}
+
+})()
+
+Huge.View = (function() {
+
+	var mobileView,
+			menuItemTemplate,
+			menuItemSubTemplate,
+			hugeBody
+
+
+	var setMobileView = function() {
+		window.innerWidth < 768 ? mobileView = true : mobileView = false
+		// console.log("setting inital mobileView to: ", mobileView)
+	}
+
+	var closeMobileNav = function() {
+		console.log("closing menu")
+		hugeBody.classList.remove("menu-open")
+	}
+
+	var bindListeners = function() {
+		hugeBody = document.getElementById("body")
+		hugeBody.addEventListener("click", handleClick, true);
+		window.addEventListener("resize", handleResize, true)
+	}
+
+	var handleClick = function(e) {
+		console.log(e.target.id)
+	}
+
+	var handleResize = function(e) {
+		var currentMobileView = mobileView 
+		e.target.innerWidth < 768 ? mobileView = true : mobileView = false
+		if (currentMobileView == true && mobileView == false) {
+			closeMobileNav()
+		}
+	}
+
+	return {
+		init: function() {
+			setMobileView()
+			bindListeners()
 		}
 	}
 
@@ -55,5 +146,8 @@ Huge.Comm = (function() {
 
 
 window.onload = function() {
-	Huge.Comm.getMenuData()
+
+	Huge.View.init()
+	Huge.Comm.getMenuData(Huge.MenuData.init)
+
 }
