@@ -1,26 +1,6 @@
 @import "fonts.css";
 
-
-/* ORIGINAL STYLES: REMOVE */
-
-/*body {
-  background: #ec008c;
-  color: #fff;
-}
-
-h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font: 20vmin/1 HUGEAvantGardeBold;
-  letter-spacing: -0.06em;
-  text-align: center;
-}*/
-
-/* SET BOX MODEL TO BORDERBOX GLOBALLY */
+/* SET BOX MODEL TO BORDER-BOX GLOBALLY */
 
 html {
   box-sizing: border-box;
@@ -207,7 +187,17 @@ li.nav-l1.active ul.nav-l2 {
   overflow-x: hidden;
 }
 
-/* CONTENT PANEL */
+.modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+/* MAIN CONTENT PANEL */
 
 #content {
   background-color: #FFFFFF;
@@ -236,23 +226,10 @@ li.nav-l1.active ul.nav-l2 {
 /* MENU OPEN/CLOSE STATE MODIFIERS */
 
 body.menu-open #content.menu-open-target {
-  /*pointer-events: none;*/
-  /*background-color: #444444;*/
-  /*opacity: .9;*/
   right: -100%;
   margin-left: -4.5rem;
   -webkit-transform: translate(100vw,0);
   transform: translate(100vw,0);
-  transition: all 0.5s ease;
-}
-
-.modal-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  pointer-events: none;
   transition: all 0.5s ease;
 }
 
