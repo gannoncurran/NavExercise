@@ -46,7 +46,8 @@ Huge.MenuData = (function() {
 			}
 			menuItems[idPrefix + id] = menuItem
 		}
-		console.log("menuItems is now: ", menuItems)
+		// console.log("menuItems is now: ", menuItems)
+		Huge.View.renderMenu(menuItems)
 	}
 
 	return {
@@ -116,19 +117,32 @@ Huge.Template = (function() {
 Huge.View = (function() {
 
 	var mobileView,
-			menuItemTemplate,
-			menuItemSubTemplate,
+			// menuItemTemplate,
+			// menuItemSubTemplate,
 			hugeBody
 
-	var extractTemplates = function() {
-		menuItemTemplate = Huge.Template.get("nav-l1-template")
-		menuItemSubTemplate = Huge.Template.get("nav-l2-template")
-		console.log(menuItemTemplate)
-		console.log(menuItemSubTemplate)
-	}
+	// var extractTemplates = function() {
+	// 	menuItemTemplate = Huge.Template.get("nav-l1-template")
+	// 	menuItemSubTemplate = Huge.Template.get("nav-l2-template")
+	// 	// console.log(menuItemTemplate)
+	// 	// console.log(menuItemSubTemplate)
+	// }
 
-	var renderMenu = function() {
-		
+	var renderMenu = function(menuData) {
+		console.log("render data", menuData)
+		// console.log(Object.keys(menuData))
+
+		var keys = Object.keys(menuData)
+		// console.log("in render", menuItemTemplate)
+
+		for (var i = 0; i < 1; i ++) {
+			var menuItem = Huge.Template.get("nav-l1-template")
+			menuItem[0].children[1].textContent = menuData[keys[i]].label
+			menuItem[0].children[1].href = menuData[keys[i]].url
+			document.getElementById("nav-l1-mountpoint").appendChild(menuItem[0])
+			console.log("menuItem: ", menuItem)
+		}
+
 	}
 
 	var setMobileView = function() {
@@ -160,8 +174,11 @@ Huge.View = (function() {
 	return {
 		init: function() {
 			setMobileView()
-			extractTemplates()
+			// extractTemplates()
 			bindListeners()
+		},
+		renderMenu: function(menuData) {
+			renderMenu(menuData)
 		}
 	}
 
