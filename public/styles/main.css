@@ -37,6 +37,7 @@ p {
 
 ul {
   list-style-type: none;
+  margin: 0;
 }
 
 /* HEADER CONTAINER AND BUTTONS */
@@ -103,7 +104,6 @@ header {
 .nav-btn-wrapper {
   padding: 72px 0 0 72px;
   position: relative;
-  background-color: pink;
   min-height: 100%;
 }
 
@@ -125,8 +125,11 @@ li.nav-l1, li.nav-l2 {
 a.nav-l1, a.nav-l2 {
   display: block;
   text-decoration: none;
-  background-color: #FFFFFF;
   color: #000000;
+}
+
+a.nav-l1:focus, a.nav-l2:focus {
+  outline: none;
 }
 
 a.nav-l1 {
