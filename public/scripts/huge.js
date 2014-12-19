@@ -135,11 +135,12 @@ Huge.View = (function() {
 		var keys = Object.keys(menuData)
 		// console.log("in render", menuItemTemplate)
 
-		for (var i = 0; i < 1; i ++) {
-			var menuItem = Huge.Template.get("nav-l1-template")
-			menuItem[0].children[1].textContent = menuData[keys[i]].label
-			menuItem[0].children[1].href = menuData[keys[i]].url
-			document.getElementById("nav-l1-mountpoint").appendChild(menuItem[0])
+		for (var i = 0; i < keys.length; i ++) {
+			var template = Huge.Template.get("nav-l1-template")
+			var menuItem = template[0].cloneNode(true)
+			menuItem.children[1].textContent = menuData[keys[i]].label
+			menuItem.children[1].href = menuData[keys[i]].url
+			document.getElementById("nav-l1-mountpoint").appendChild(menuItem)
 			console.log("menuItem: ", menuItem)
 		}
 
