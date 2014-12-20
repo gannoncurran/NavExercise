@@ -103,10 +103,10 @@ header {
   position: fixed;
   overflow: scroll;
   width: 100%;
-  height: 0%;
+  height: 100%;
   -webkit-transform: translate(-100vw,0);
   transform: translate(-100vw,0);
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .nav-btn-wrapper {
@@ -405,6 +405,7 @@ li.nav-l1 {
 }
 
 a.nav-l1 {
+  background-color: transparent;
   margin: 0;
   height: 4.5rem;
   color: #FFFFFF;
@@ -413,7 +414,7 @@ a.nav-l1 {
   font-family: 'HUGEAvantGardeBold', sans-serif;
 }
 
-a.nav-l1:hover {
+a.nav-l1:hover, a.nav-l1:focus {
   color: #ec008c;
   background-color: #FFFFFF;
 }
@@ -424,7 +425,6 @@ ul.nav-l2 {
   background-color: #FFFFFF;
   overflow: visible;
   position: absolute;
-  /*display: none;*/
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease;

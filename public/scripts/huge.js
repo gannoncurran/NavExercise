@@ -44,7 +44,6 @@ Huge.MenuData = (function() {
 			}
 			menuItems[idPrefix + id] = menuItem
 		}
-		// console.log("menuItems is now: ", menuItems)
 		Huge.View.renderMenu(menuItems)
 	}
 
@@ -115,23 +114,12 @@ Huge.Template = (function() {
 Huge.View = (function() {
 
 	var mobileView,
-			// menuItemTemplate,
-			// menuItemSubTemplate,
-			hugeBody
-
-	// var extractTemplates = function() {
-	// 	menuItemTemplate = Huge.Template.get("nav-l1-template")
-	// 	menuItemSubTemplate = Huge.Template.get("nav-l2-template")
-	// 	// console.log(menuItemTemplate)
-	// 	// console.log(menuItemSubTemplate)
-	// }
+			hugeBody,
+			subMenuOpen = false
 
 	var renderMenu = function(menuData) {
-		console.log("render data", menuData)
-		// console.log(Object.keys(menuData))
 
 		var keys = Object.keys(menuData)
-		// console.log("in render", menuItemTemplate)
 
 		for (var i = 0; i < keys.length; i ++) {
 			item = menuData[keys[i]]
@@ -143,10 +131,8 @@ Huge.View = (function() {
 			if (item.hasSubs == true) {
 				menuItem.classList.remove("no-subs")
 				var subKeys = Object.keys(item.subs)
-				console.log(subKeys)
 				for (var j = 0; j < subKeys.length; j ++) {
 					subItem = item.subs[subKeys[j]]
-					console.log("subItem: ", subItem)
 					var subTemplate = Huge.Template.get("nav-l2-template")
 					var subMenuItem = subTemplate[0].cloneNode(true)
 					subMenuItem.children[0].textContent = subItem.label
@@ -156,7 +142,6 @@ Huge.View = (function() {
 				}
 			}
 			document.getElementById("nav-l1-mountpoint").appendChild(menuItem)
-			console.log(menuItem)
 		}
 
 	}
@@ -165,8 +150,22 @@ Huge.View = (function() {
 		window.innerWidth < 768 ? mobileView = true : mobileView = false
 	}
 
+	var openMobileNav = function() {
+		hugeBody.classList.add("menu-open")
+	}
+
 	var closeMobileNav = function() {
+		closeAllSubMenus()
+		hugeBody.classList.remove("modal-active")
 		hugeBody.classList.remove("menu-open")
+	}
+
+	var closeAllSubMenus = function() {
+		var menul1s = document.getElementsByClassName("l1")
+		for (var i = 0; i < menul1s.length; i ++) {
+			menul1s[i].classList.remove("open")
+		}
+
 	}
 
 	var bindListeners = function() {
@@ -176,7 +175,23 @@ Huge.View = (function() {
 	}
 
 	var handleClick = function(e) {
-		console.log(e.target.id)
+		var elId = e.target.id
+		var elClasses = e.target.classList
+		
+		if (elId == "mobile-menu-open") {
+			openMobileNav()
+		} else if (elId == "mobile-menu-close") {
+			closeMobileNav()
+		}	else if (elClasses.contains("al1") && mobileView) {
+			e.target.parentNode.classList.toggle("open")
+		} else if (elClasses.contains("al1") && !mobileView) {
+			closeAllSubMenus()
+			e.target.parentNode.classList.toggle("open")
+			hugeBody.classList.add("modal-active")
+		} else if (!mobileView) {
+			hugeBody.classList.remove("modal-active")
+			closeAllSubMenus()
+		}
 	}
 
 	var handleResize = function(e) {
@@ -190,11 +205,13 @@ Huge.View = (function() {
 	return {
 		init: function() {
 			setMobileView()
-			// extractTemplates()
 			bindListeners()
 		},
 		renderMenu: function(menuData) {
 			renderMenu(menuData)
+		},
+		closeAll: function() {
+			closeAllSubMenus()
 		}
 	}
 

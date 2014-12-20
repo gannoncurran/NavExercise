@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="./styles/main.css">
   <script src="./scripts/huge.js"></script>
 </head>
-<!-- <body id="body"> -->
 <body id="body">
 	<header>
 			<a id="logo" class="menu-open-target" href="#"></a>
-			<a class="btn-menu open menu-open-target" href="#nil" onclick="menuOpen()"></a>
-			<a class="btn-menu close menu-open-target" href="#nil" onclick="menuClose()"></a>
+			<a id="mobile-menu-open" class="btn-menu open menu-open-target" href="#nil"></a>
+			<a id="mobile-menu-close" class="btn-menu close menu-open-target" href="#nil"></a>
 	</header>
 	<!-- MASTER CONTAINER -->
 	<div id="container">
@@ -21,51 +20,6 @@
 		<nav id="nav-main" class="menu-open-target">
 			<div class="nav-btn-wrapper">
 				<ul id="nav-l1-mountpoint" class="nav-l1">
-					<!-- <li class="nav-l1">
-						<div class="nav-l1 arrow no-subs-target"></div>
-						<a class="nav-l1" href="#nil" onClick="menuSubToggle(this.parentElement)">Link w triblah</a>
-						<ul class="nav-l2 no-subs-target">
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff that is reall</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-						</ul>
-					</li>
-					<li class="nav-l1 no-subs">
-						<div class="nav-l1 arrow no-subs-target"></div>
-						<a class="nav-l1" href="#nil" onClick="menuSubToggle(this.parentElement)">Link w triblah</a>
-						<ul class="nav-l2 no-subs-target">
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff that is reall</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-						</ul>
-					</li>
-					<li class="nav-l1">
-						<div class="nav-l1 arrow no-subs-target"></div>
-						<a class="nav-l1" href="#nil" onClick="menuSubToggle(this.parentElement)">Link w triblah</a>
-						<ul class="nav-l2 no-subs-target">
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff that is reall</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-						</ul>
-					</li>
-					<li class="nav-l1">
-						<div class="nav-l1 arrow no-subs-target"></div>
-						<a class="nav-l1" href="#nil" onClick="menuSubToggle(this.parentElement)">Link w tri</a>
-						<ul class="nav-l2 no-subs-target">
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-						</ul>
-					</li>
-					<li class="nav-l1 no-subs">
-						<div class="nav-l1 arrow no-subs-target"></div>
-						<a class="nav-l1" href="#nil" onClick="menuSubToggle(this.parentElement)">Link w tri</a>
-						<ul class="nav-l2 no-subs-target">
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-							<li class="nav-l2"><a class="nav-l2" href="#nil">Thing an Stuff</a></li>
-						</ul>
-					</li> -->
 				</ul>
 				<div class="copyright">&copy; 2014 Huge. All Rights Reserved.</div>
 			</div>
@@ -88,9 +42,9 @@
 	</div>
 
 	<div id="nav-l1-template" class="hide">
-		<li class="nav-l1 no-subs">
+		<li class="nav-l1 no-subs l1">
 			<div class="nav-l1 arrow no-subs-target"></div>
-			<a class="nav-l1" href="#nil">MainItem</a>
+			<a class="nav-l1 al1" href="#nil">MainItem</a>
 			<ul id="nav-l2-mountpoint" class="nav-l2 no-subs-target">
 			</ul>
 		</li>
@@ -101,6 +55,7 @@
 	</div>
 
 	<!-- TODO: PULL INLINE SCRIPT OUT INTO APP JS -->
+<!-- 	
 <script>
 function menuOpen() {
     document.getElementById("body").classList.add("menu-open");
@@ -113,7 +68,7 @@ function menuSubToggle(el) {
 	document.getElementById("body").classList.toggle("modal-active")
 }
 </script>
-
+ -->
 </body>
 
 </html>
