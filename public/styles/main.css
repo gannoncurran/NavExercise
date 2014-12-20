@@ -1,18 +1,465 @@
 @import "fonts.css";
 
+/* SET BOX MODEL TO BORDER-BOX GLOBALLY */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* GLOBALS */
+
 body {
-  background: #ec008c;
-  color: #fff;
+  font-family: 'Galaxie', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'HUGEAvantGardeBold', sans-serif;
 }
 
 h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  font-size: 2.75rem;
+  line-height: 1.09;
+  margin: 1.5rem 0;
+  padding: 1.5rem 0 .7rem 0;
+}
+
+p {
+  font-size: .875rem;
+  line-height: 1.72;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
   margin: 0;
-  font: 20vmin/1 HUGEAvantGardeBold;
-  letter-spacing: -0.06em;
+}
+
+/* HELPERS */
+
+.hide {
+  display: none;
+}
+
+/* HEADER CONTAINER AND BUTTONS */
+
+header {
+  width: 100%;
+  height: 3.75rem;
+  background-color: #ec008c;
+  padding: 1.25rem 1.5rem;
+  position: fixed;
+  z-index: 100;
+}
+
+#logo {
+  margin-left: 4.5rem;
+  width: 3.125rem;
+  height: 1.4rem;
+  display: inline-block;
+  background-image: url('../images/HUGE-white.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: translate(-100vw,0);
+  transform: translate(-100vw,0);
+  transition: all 0.5s ease;
+}
+
+.btn-menu {
+  margin: 0;
+  width: 1.5rem;
+  height: 1.4rem;
+  display: inline-block;
+  position: absolute;
+  background-size: 100%;
+  background-position: left top;
+  background-repeat: no-repeat;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: all 0.5s ease;
+}
+
+.btn-menu.open {
+  background-image: url('../images/toggle-open-clipped.svg');
+}
+
+.btn-menu.close {
+  opacity: 0;
+  visibility: hidden;
+  background-image: url('../images/toggle-close-clipped.svg');
+}
+
+/* NAVIGATION */
+
+#nav-main {
+  position: fixed;
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate(-100vw,0);
+  transform: translate(-100vw,0);
+  transition: all 0.5s ease;
+}
+
+.nav-btn-wrapper {
+  padding: 72px 0 0 72px;
+  position: relative;
+  min-height: 100%;
+}
+
+ul.nav-l1 {
+  padding: 0 0 3rem 0;
+}
+
+ul.nav-l2 {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+li.nav-l1, li.nav-l2 {
+  position: relative;
+}
+
+a.nav-l1, a.nav-l2 {
+  display: block;
+  text-decoration: none;
+  color: #000000;
+}
+
+a.nav-l1:focus, a.nav-l2:focus {
+  outline: none;
+}
+
+a.nav-l1 {
+  font-size: 21px;
+  line-height: 44px;
+  padding: 4px 24px 0 24px;
+  font-family: 'HUGEAvantGardeBold', sans-serif;
+}
+
+a.nav-l2 {
+  font-size: 16px;
+  line-height: 47px;
+  padding: 1px 24px 0 24px;
+  font-family: 'Galaxie', serif;
+}
+
+/* ++++++++++++++++++++++++++++++++++ */
+/* HOVER STATES ON MOBILE ARE STRANGE */
+/* ++++++++++++++++++++++++++++++++++ */
+
+/*a.nav-l1:hover, a.nav-l2:hover {
+  color: #ec008c;
+  background-color: #EEEEEE;
+}*/
+
+a.nav-l1:active, a.nav-l2:active {
+  color: #ec008c;
+  background-color: #EEEEEE;
+}
+
+div.nav-l1.arrow {
+  position: absolute;
+  right: 14px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/disclosure-arrow.svg');
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition: all 0.25s ease;
+}
+
+.copyright {
+  margin: 0;
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  font: .75rem/1.33 Helvetica;
+}
+
+/* NAVIGATION STATE MODIFIERS */
+
+li.nav-l1.open div.nav-l1.arrow {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  transition: all 0.25s ease;
+}
+
+li.nav-l1.open ul.nav-l2 {
+  max-height: 40rem;
+  transition: all 1s ease;
+}
+
+li.nav-l1.no-subs .no-subs-target {
+  display: none;
+}
+
+/* MASTER "VIEWPORT" MASK */
+
+#container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.modal-overlay {
+  z-index: 90;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* MAIN CONTENT PANEL */
+
+#content {
+  background-color: #FFFFFF;
+  width: 100%;
+  padding: 3.75rem 0;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: all 0.5s ease;
+}
+
+/* LAYOUT */
+
+section {
+  /*position: relative;*/
+  width: 100%;
+}
+
+.col-1 {
+  margin: 0 1.5rem;
+}
+
+/* MODULES */
+
+.img-hero {
+  height: 15rem;
+  background-image: url('../images/background-image.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* MENU OPEN/CLOSE STATE MODIFIERS */
+
+body.menu-open #content.menu-open-target {
+  right: -100%;
+  margin-left: -4.5rem;
+  -webkit-transform: translate(100vw,0);
+  transform: translate(100vw,0);
+  transition: all 0.5s ease;
+}
+
+body.menu-open .modal-overlay.menu-open-target {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.5s ease;
+}
+
+body.menu-open #nav-main.menu-open-target {
+  margin-left: -4.5rem;
+  height: 100%;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: transform 0.5s ease;
+}
+
+body.menu-open #logo.menu-open-target {
+  margin-left: 0rem;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: all 0.5s ease;
+}
+
+body.menu-open .btn-menu.menu-open-target {
+  margin-left: -4.5rem;
+  -webkit-transform: translate(100vw,0);
+  transform: translate(100vw,0);
+  transition: all 0.5s ease;
+}
+
+body.menu-open .btn-menu.open.menu-open-target {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.menu-open .btn-menu.close.menu-open-target {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* MEDIA QUERIES FOR DESKTOP */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+
+@media only screen and (min-width: 768px) {
+
+h1 {
+  font-size: 7.5rem;
+  line-height: 8.25rem;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+
+header {
+  height: 4.5rem;
+  padding: 1.5rem;
+}
+
+#logo {
+  margin-left: 0;
+  width: 3.75rem;
+  height: 1.55rem;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: all 0.5s ease;
+}
+
+.col-1 {
+  max-width: 60.5rem;
+  margin: 0 auto;
+}
+
+.img-hero {
+  height: 40rem;
+}
+
+.col-1.hero-headline {
+  display: table;
+  max-width: 100%;
+  width: 100%;
+  height: 40rem;
+  position: absolute;
+  top: 4.5rem;
+}
+
+h1.hero-headline {
+  vertical-align: middle;
+  display: table-cell;
   text-align: center;
+  padding: 0 5rem;
+  color: #FFFFFF;
+}
+
+.btn-menu {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+#nav-main {
+  overflow: visible;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding-left: 122px;
+  z-index: 200;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  transition: all 0.5s ease;
+}
+
+.nav-btn-wrapper {
+  width: 2000px;
+  padding: 0;
+  position: static;
+  min-height: initial;
+}
+
+ul.nav-l1 {
+  font-size: 0;
+  padding: 0;
+}
+
+ul.nav-l1 > * {
+  font-size: 16px;
+  vertical-align: top;
+}
+
+li.nav-l1 {
+  position: static;
+  display: inline-block;
+  padding: 0;
+}
+
+a.nav-l1 {
+  background-color: transparent;
+  margin: 0;
+  height: 4.5rem;
+  color: #FFFFFF;
+  line-height: 75px;
+  padding: 0px 24px;
+  font-family: 'HUGEAvantGardeBold', sans-serif;
+}
+
+a.nav-l1:hover, a.nav-l1:focus {
+  color: #ec008c;
+  background-color: #FFFFFF;
+}
+
+ul.nav-l2 {
+  max-height: initial;
+  padding: 12px 0;
+  background-color: #FFFFFF;
+  overflow: visible;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+li.nav-l2 {
+  padding: 0;
+}
+
+a.nav-l2:hover {
+  background-color: #EEEEEE;
+  color: #ec008c;
+}
+
+div.nav-l1.arrow {
+  display: none;
+}
+
+.copyright {
+  display: none;
+}
+
+
+/* NAVIGATION STATE MODIFIERS*/
+
+li.nav-l1.open ul.nav-l2 {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.5s ease;
+}
+
+body.modal-active .modal-overlay {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s ease;
+}
+
 }

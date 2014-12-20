@@ -2,9 +2,73 @@
 <html>
 <head>
   <title>HUGE NavExercise</title>
-  <link rel="stylesheet" href="/styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./styles/normalize.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <script src="./scripts/huge.js"></script>
 </head>
-<body>
-<h1>Hello.</h1>
+<body id="body">
+	<header>
+			<a id="logo" class="menu-open-target" href="#"></a>
+			<a id="mobile-menu-open" class="btn-menu open menu-open-target" href="#nil"></a>
+			<a id="mobile-menu-close" class="btn-menu close menu-open-target" href="#nil"></a>
+	</header>
+	<!-- MASTER CONTAINER -->
+	<div id="container">
+		<!-- NAV PANEL -->
+		<nav id="nav-main" class="menu-open-target">
+			<div class="nav-btn-wrapper">
+				<ul id="nav-l1-mountpoint" class="nav-l1">
+				</ul>
+				<div class="copyright">&copy; 2014 Huge. All Rights Reserved.</div>
+			</div>
+		</nav>
+		<!-- MAIN CONTENT PANEL -->
+		<div id="content" class="menu-open-target">
+			<div class="modal-overlay menu-open-target"></div>
+			<section>
+				<div class="img-hero"></div>
+				<div class="col-1 hero-headline">
+					<h1 class="hero-headline">Get paid for<br>giving a shit.</h1>
+				</div>
+			</section>
+			<section>
+				<div class="col-1">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nulla praesentium atque sunt, inventore aut placeat voluptas reiciendis totam, excepturi nam obcaecati eos enim magni ipsa molestiae quam nobis commodi natus dolorum! Totam deleniti non pariatur corporis nostrum deserunt, exercitationem magnam fugiat eveniet natus fugit dolorum culpa temporibus perspiciatis ea, commodi sit impedit suscipit hic praesentium. Officiis, et, optio consequuntur praesentium deserunt odit eum quibusdam dicta asperiores! Atque minus dolorum reprehenderit saepe sapiente incidunt, quisquam accusantium a consequatur! Non quas est aliquid reprehenderit accusamus vitae necessitatibus laborum reiciendis soluta culpa voluptatibus nesciunt expedita, quia quos optio at corporis. Eos ab voluptate recusandae officia molestiae vel voluptas inventore enim officiis facere id reiciendis consequatur odio quo, eius similique veniam, magnam molestias ipsa iusto. Nulla a facilis aperiam ipsa accusantium nemo magnam? Dignissimos tempora, esse quaerat corporis illum distinctio voluptates sunt provident quod aliquid harum voluptate accusamus ullam veniam impedit laudantium, minus, ut tenetur eaque dolorem. Suscipit beatae voluptate vel placeat. Aspernatur est ab fugit, perspiciatis aliquam porro hic maiores alias labore. Dolorum ut accusantium iusto illum quaerat, sint nemo. Voluptatibus tempora alias ad debitis, accusantium accusamus quaerat nobis animi modi nam facere tenetur, laborum iusto eos nemo voluptates sit! Error, nesciunt. Molestias, laboriosam, provident. Iusto delectus odit praesentium veritatis reiciendis libero, amet eaque saepe commodi, a voluptas aspernatur sequi nisi! Reprehenderit, repellat officiis libero laudantium sapiente! Molestiae porro nobis, ex recusandae! Error modi eveniet omnis cumque adipisci, magni, maxime, neque et inventore itaque voluptatum labore fugit exercitationem eius architecto hic. Amet perferendis id in itaque aspernatur, maiores harum consequuntur ut nam tempora labore natus, nobis hic repellendus a soluta accusantium optio. Assumenda molestias veniam voluptate eligendi delectus illo error aliquam eos at doloribus deserunt tempore, modi similique tenetur non recusandae reprehenderit ipsum necessitatibus, quisquam eius quaerat quis vero voluptatum minus?</p>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div id="nav-l1-template" class="hide">
+		<li class="nav-l1 no-subs l1">
+			<div class="nav-l1 arrow no-subs-target"></div>
+			<a class="nav-l1 al1" href="#nil">MainItem</a>
+			<ul id="nav-l2-mountpoint" class="nav-l2 no-subs-target">
+			</ul>
+		</li>
+	</div>
+
+	<div id="nav-l2-template" class="hide">
+		<li class="nav-l2"><a class="nav-l2" href="#nil">SubItem</a></li>
+	</div>
+
+	<!-- TODO: PULL INLINE SCRIPT OUT INTO APP JS -->
+<!-- 	
+<script>
+function menuOpen() {
+    document.getElementById("body").classList.add("menu-open");
+}
+function menuClose() {
+    document.getElementById("body").classList.remove("menu-open");
+}
+function menuSubToggle(el) {
+	el.classList.toggle("open")
+	document.getElementById("body").classList.toggle("modal-active")
+}
+</script>
+ -->
 </body>
+
 </html>
